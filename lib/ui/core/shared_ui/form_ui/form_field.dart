@@ -88,7 +88,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
                   break;
                 case 'Password':
                   if (!RegExp(
-                    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+                    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$',
                   ).hasMatch(value)) {
                     errorMessage = "Please choose a strong Password";
                   }
