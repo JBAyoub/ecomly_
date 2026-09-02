@@ -1,3 +1,4 @@
+import 'package:ecomly_frontend/ui/core/shared_ui/black_button_primary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -67,33 +68,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               left: 0,
               right: 0,
               height: 50,
-
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: FilledButton(
-                  style: FilledButton.styleFrom(
-                    visualDensity: .comfortable,
-                    elevation: 2,
-                    backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(8),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: .center,
-                    spacing: 10,
-                    children: [
-                      Text(
-                        'Get started',
-                        style: TextStyle(
-                          fontFamily: 'GeneralSans',
-                          fontSize: 18,
-                        ),
-                      ),
-                      Icon(Icons.arrow_forward_rounded),
-                    ],
-                  ),
+                child: BlackButtonPrimary(
+                  buttonText: 'Get Started',
+                  iconData: Icons.arrow_forward_ios_rounded,
+                  onPressed: () {
+                    Navigator.of(context)
+                        .popAndPushNamed('/account_registration');
+                  },
                 ),
               ),
             ),
