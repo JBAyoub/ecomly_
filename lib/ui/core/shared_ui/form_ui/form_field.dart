@@ -104,7 +104,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
               hideText: hideText,
               onPressed: () {
                 setState(() {
-                  hideText != hideText;
+                  hideText = !hideText;
                 });
               },
             ),
