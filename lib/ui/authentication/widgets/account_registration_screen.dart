@@ -65,7 +65,7 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                 ),
                 const SizedBox(height: 10),
                 Form(
-                  autovalidateMode: .onUserInteractionIfError,
+                  autovalidateMode: .onUnfocus,
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

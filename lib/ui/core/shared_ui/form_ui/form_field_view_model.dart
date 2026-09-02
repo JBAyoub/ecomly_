@@ -20,7 +20,8 @@ class FormFieldViewModel {
     return isFieldValid
         ? const Icon(
             Icons.check_circle_outline_sharp,
-            color: Color.fromARGB(200, 0, 255, 0),
+            fontWeight: .bold,
+            color: Color(0xFF0C9409),
           )
         : const Icon(
             Icons.error_outline_rounded,

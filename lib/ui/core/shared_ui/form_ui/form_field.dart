@@ -39,8 +39,9 @@ class _CustomFormFieldState extends State<CustomFormField> {
   );
   final OutlineInputBorder validFieldBorder = OutlineInputBorder(
     borderSide: const BorderSide(
-      color: Color.fromARGB(250, 0, 150, 0),
-      width: 1,
+      style: .solid,
+      color: Color(0xFF0C9409),
+      width: 2,
     ),
     borderRadius: BorderRadius.circular(10),
   );
