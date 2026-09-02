@@ -59,8 +59,8 @@ class _CustomFormFieldState extends State<CustomFormField> {
                 ).hasMatch(value)) {
                   return "Please choose a strong Password";
                 }
-                return null;
             }
+            return null;
           },
           obscureText: widget.hideText,
           decoration: InputDecoration(
