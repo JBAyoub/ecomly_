@@ -36,6 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 softWrap: true,
                 textAlign: TextAlign.left,
                 style: TextStyle(
+                  decoration: .none,
                   fontFamily: 'GeneralSans',
                   color: Colors.black,
                   fontSize: 60,

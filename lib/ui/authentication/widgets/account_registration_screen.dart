@@ -19,7 +19,7 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
   );
   final Widget facebookLogo = SvgPicture.asset(
     'assets/vector_images/logos_facebook.svg',
-    semanticsLabel: 'Google',
+    semanticsLabel: 'Facebook',
     renderingStrategy: .raster,
     clipBehavior: .antiAlias,
   );
@@ -27,7 +27,39 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool isFormValid = false;
+  bool _isFormValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.addListener(_validateForm);
+    emailController.addListener(_validateForm);
+    passwordController.addListener(_validateForm);
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _validateForm() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if (isValid != _isFormValid) {
+      setState(() {
+        _isFormValid = isValid;
+      });
+    }
+  }
+
+  void _onCreateAccountPress() {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    // Proceed with registration API call/navigation
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,12 +150,7 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                           ),
                           backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                         ),
-                        onPressed: isFormValid
-                            ? () {
-                                Navigator.of(context)
-                                    .popAndPushNamed('/onboarding');
-                              }
-                            : null,
+                        onPressed: _isFormValid ? _onCreateAccountPress : null,
                         child: const Text(
                           'Create an account',
                           style: TextStyle(
