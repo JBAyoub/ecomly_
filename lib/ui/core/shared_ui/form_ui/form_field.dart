@@ -37,6 +37,13 @@ class _CustomFormFieldState extends State<CustomFormField> {
     ),
     borderRadius: BorderRadius.circular(10),
   );
+  final OutlineInputBorder validFieldBorder = OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Color.fromARGB(250, 0, 150, 0),
+      width: 1,
+    ),
+    borderRadius: BorderRadius.circular(10),
+  );
 
   late bool hideText;
   bool? isFieldValid;
@@ -117,8 +124,14 @@ class _CustomFormFieldState extends State<CustomFormField> {
               fontWeight: FontWeight.w100,
               color: Color.fromARGB(255, 149, 149, 149),
             ),
-            enabledBorder: enabledFocusedBorder,
-            focusedBorder: enabledFocusedBorder,
+            enabledBorder: isFieldValid == true
+                ? validFieldBorder
+                : enabledFocusedBorder,
+            focusedBorder: isFieldValid == true
+                ? validFieldBorder
+                : enabledFocusedBorder,
+
+            // Flutter automatically uses these when the validator returns an error string
             errorBorder: errorBorder,
             focusedErrorBorder: errorBorder,
           ),
