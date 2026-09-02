@@ -1,4 +1,4 @@
-import 'package:ecomly_frontend/ui/core/shared_ui/form_field.dart';
+import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -24,7 +24,6 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
     clipBehavior: .antiAlias,
   );
   final _formKey = GlobalKey<FormState>();
-
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -71,7 +70,7 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    spacing: 12,
+                    spacing: 15,
                     children: [
                       CustomFormField(
                         fieldController: nameController,
@@ -224,10 +223,10 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                           ],
                         ),
                       ),
+
                       Row(
                         mainAxisSize: .min,
                         mainAxisAlignment: .center,
-                        spacing: 0,
                         children: [
                           Text(
                             'Already have an account?',
