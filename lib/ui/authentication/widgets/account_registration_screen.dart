@@ -38,7 +38,7 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
             color: const Color.fromARGB(255, 255, 255, 255),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: .max,
@@ -66,11 +66,12 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                 ),
                 const SizedBox(height: 10),
                 Form(
+                  autovalidateMode: .onUnfocus,
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    spacing: 20,
+                    spacing: 12,
                     children: [
                       CustomFormField(
                         fieldController: nameController,

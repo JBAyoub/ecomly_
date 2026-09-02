@@ -50,7 +50,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
                 break;
               case 'Full Name':
                 if (!RegExp(r'/^[A-Za-z]+$/').hasMatch(value)) {
-                  return "Names can't contain numbers";
+                  return "Names can't contain numbers or special characters";
                 }
                 break;
               case 'Password':
