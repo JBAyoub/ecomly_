@@ -38,6 +38,30 @@ class _CustomFormFieldState extends State<CustomFormField> {
           style: TextStyle(fontFamily: 'GeneralSans', fontSize: 18),
         ),
         TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your ${widget._labelText}';
+            }
+            switch (widget._labelText) {
+              case 'Email':
+                if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                  return 'Please enter a valid email';
+                }
+                break;
+              case 'Full Name':
+                if (!RegExp(r'/^[A-Za-z]+$/').hasMatch(value)) {
+                  return "Names can't contain numbers";
+                }
+                break;
+              case 'Password':
+                if (!RegExp(
+                  r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+                ).hasMatch(value)) {
+                  return "Please choose a strong Password";
+                }
+                return null;
+            }
+          },
           obscureText: widget.hideText,
           decoration: InputDecoration(
             suffixIcon: widget.isPassword
