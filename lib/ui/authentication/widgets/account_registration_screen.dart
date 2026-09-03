@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AccountRegistrationScreen extends StatefulWidget {
-  const new({super.key});
+  const AccountRegistrationScreen({super.key});
 
   @override
   State<AccountRegistrationScreen> createState() =>
@@ -55,8 +55,8 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
   }
 
   void _onCreateAccountPress() {
-    final email = emailController.text.trim();
-    final password = passwordController.text.trim();
+    // final email = emailController.text.trim();
+    // final password = passwordController.text.trim();
     // Proceed with registration API call/navigation
   }
 
