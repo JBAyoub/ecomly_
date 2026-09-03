@@ -68,9 +68,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         color: const Color.fromARGB(150, 1, 1, 1),
                       ),
                     ),
-
                     const SizedBox(height: 30),
-
                     Form(
                       key: _formKey,
                       child: CustomFormField(
