@@ -10,6 +10,7 @@ class CustomFormField extends StatefulWidget {
     this._textInputType,
     bool hideText = false,
     this.isPassword = false,
+    this.onValidityChanged,
   }) : _initialHideText = hideText;
 
   final TextEditingController _fieldController;
@@ -18,6 +19,7 @@ class CustomFormField extends StatefulWidget {
   final TextInputType? _textInputType;
   final bool _initialHideText;
   final bool isPassword;
+  final ValueChanged<bool>? onValidityChanged;
 
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
@@ -48,10 +50,59 @@ class _CustomFormFieldState extends State<CustomFormField> {
 
   late bool hideText;
   bool? isFieldValid;
+  String? _errorText;
+  bool _hasInteracted = false;
+
   @override
   void initState() {
     super.initState();
     hideText = widget._initialHideText;
+    widget._fieldController.addListener(_onChanged);
+  }
+
+  @override
+  void dispose() {
+    widget._fieldController.removeListener(_onChanged);
+    super.dispose();
+  }
+
+  void _onChanged() {
+    final value = widget._fieldController.text;
+    final errorMessage = _validate(value);
+    final isValid = errorMessage == null;
+
+    setState(() {
+      _hasInteracted = true;
+      _errorText = errorMessage;
+      isFieldValid = isValid;
+    });
+    widget.onValidityChanged?.call(isValid);
+  }
+
+  String? _validate(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your ${widget._labelText}';
+    }
+    switch (widget._labelText) {
+      case 'Email':
+        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+          return 'Please enter a valid email';
+        }
+        break;
+      case 'Full Name':
+        if (!RegExp(r'^[A-Za-z\s]+$').hasMatch(value)) {
+          return "Names can't contain numbers or special characters";
+        }
+        break;
+      case 'Password':
+        if (!RegExp(
+          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$',
+        ).hasMatch(value)) {
+          return "Please choose a strong Password";
+        }
+        break;
+    }
+    return null;
   }
 
   @override
@@ -68,44 +119,8 @@ class _CustomFormFieldState extends State<CustomFormField> {
           controller: widget._fieldController,
           keyboardType: widget._textInputType,
           obscureText: hideText,
-          validator: (value) {
-            String? errorMessage;
-
-            if (value == null || value.isEmpty) {
-              errorMessage = 'Please enter your ${widget._labelText}';
-            } else {
-              switch (widget._labelText) {
-                case 'Email':
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    errorMessage = 'Please enter a valid email';
-                  }
-                  break;
-                case 'Full Name':
-                  // Removed JavaScript regex slashes
-                  if (!RegExp(r'^[A-Za-z\s]+$').hasMatch(value)) {
-                    errorMessage =
-                        "Names can't contain numbers or special characters";
-                  }
-                  break;
-                case 'Password':
-                  if (!RegExp(
-                    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$',
-                  ).hasMatch(value)) {
-                    errorMessage = "Please choose a strong Password";
-                  }
-                  break;
-              }
-            }
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) {
-                setState(() {
-                  isFieldValid = errorMessage == null;
-                });
-              }
-            });
-            return errorMessage;
-          },
           decoration: InputDecoration(
+            errorText: isFieldValid == false ? _errorText : null,
             suffixIcon: _viewModel.buildSuffixIcon(
               isFieldValid: isFieldValid,
               isPassword: widget.isPassword,

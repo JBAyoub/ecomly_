@@ -27,15 +27,11 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool _isFormValid = false;
+  bool _isNameValid = false;
+  bool _isEmailValid = false;
+  bool _isPasswordValid = false;
 
-  @override
-  void initState() {
-    super.initState();
-    nameController.addListener(_validateForm);
-    emailController.addListener(_validateForm);
-    passwordController.addListener(_validateForm);
-  }
+  bool get _isFormValid => _isNameValid && _isEmailValid && _isPasswordValid;
 
   @override
   void dispose() {
@@ -43,15 +39,6 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
-  }
-
-  void _validateForm() {
-    final isValid = _formKey.currentState?.validate() ?? false;
-    if (isValid != _isFormValid) {
-      setState(() {
-        _isFormValid = isValid;
-      });
-    }
   }
 
   void _onCreateAccountPress() {
@@ -97,7 +84,7 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                 ),
                 const SizedBox(height: 10),
                 Form(
-                  autovalidateMode: .onUnfocus,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -110,6 +97,8 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                         labelText: "Full Name",
                         textInputType: .name,
                         hideText: false,
+                        onValidityChanged: (isValid) =>
+                            setState(() => _isNameValid = isValid),
                       ),
 
                       CustomFormField(
@@ -118,6 +107,8 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                         labelText: "Email",
                         textInputType: .emailAddress,
                         hideText: false,
+                        onValidityChanged: (isValid) =>
+                            setState(() => _isEmailValid = isValid),
                       ),
                       CustomFormField(
                         fieldController: passwordController,
@@ -126,6 +117,8 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                         textInputType: .visiblePassword,
                         hideText: true,
                         isPassword: true,
+                        onValidityChanged: (isValid) =>
+                            setState(() => _isPasswordValid = isValid),
                       ),
                       const Text(
                         'By signing up you agree to our Terms, Privacy Policy, and Cookie Use',
