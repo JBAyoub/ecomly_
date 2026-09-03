@@ -1,4 +1,5 @@
 import 'package:ecomly_frontend/ui/authentication/widgets/account_registration_screen.dart';
+import 'package:ecomly_frontend/ui/authentication/widgets/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'ui/core/onboarding/onboarding_screen.dart';
@@ -10,8 +11,9 @@ void main() {
       routes: {
         '/onboarding': (context) => OnboardingScreen(),
         '/account_registration': (context) => AccountRegistrationScreen(),
+        '/login': (context) => LoginScreen(),
       },
-      initialRoute: '/onboarding',
+      initialRoute: '/login',
       title: 'Ecomly',
     ),
   );

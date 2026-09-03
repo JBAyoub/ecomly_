@@ -10,6 +10,7 @@ class CustomFormField extends StatefulWidget {
     this._textInputType,
     bool hideText = false,
     this.isPassword = false,
+    this.isRegistration,
     this.onValidityChanged,
   }) : _initialHideText = hideText;
 
@@ -19,6 +20,7 @@ class CustomFormField extends StatefulWidget {
   final TextInputType? _textInputType;
   final bool _initialHideText;
   final bool isPassword;
+  final bool? isRegistration;
   final ValueChanged<bool>? onValidityChanged;
 
   @override
@@ -51,6 +53,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
   late bool hideText;
   bool? isFieldValid;
   String? _errorText;
+  // ignore: unused_field
   bool _hasInteracted = false;
 
   @override
@@ -95,10 +98,12 @@ class _CustomFormFieldState extends State<CustomFormField> {
         }
         break;
       case 'Password':
-        if (!RegExp(
-          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$',
-        ).hasMatch(value)) {
-          return "Please choose a strong Password";
+        if (widget.isRegistration != null) {
+          if (!RegExp(
+            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$',
+          ).hasMatch(value)) {
+            return "Please choose a strong Password";
+          }
         }
         break;
     }
