@@ -23,61 +23,78 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: 10,
-            children: [
-              Text(
-                "Forgot Password",
-                style: TextStyle(
-                  fontFamily: 'GeneralSans',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 32,
+        child: CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
                 ),
-              ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Forgot Password",
+                      style: TextStyle(
+                        fontFamily: 'GeneralSans',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 32,
+                      ),
+                    ),
 
-              Text(
-                "Enter your email for the verification process.",
-                style: TextStyle(
-                  fontFamily: 'GeneralSans',
-                  fontWeight: FontWeight.w300,
-                  fontSize: 16,
-                  color: const Color.fromARGB(150, 1, 1, 1),
-                ),
-              ),
+                    const SizedBox(height: 10),
 
-              Text(
-                "We will send 4 digits code to your email.",
-                style: TextStyle(
-                  fontFamily: 'GeneralSans',
-                  fontWeight: FontWeight.w300,
-                  fontSize: 16,
-                  color: const Color.fromARGB(150, 1, 1, 1),
-                ),
-              ),
+                    Text(
+                      "Enter your email for the verification process.",
+                      style: TextStyle(
+                        fontFamily: 'GeneralSans',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
+                        color: const Color.fromARGB(150, 1, 1, 1),
+                      ),
+                    ),
 
-              Form(
-                key: _formKey,
-                child: CustomFormField(
-                  textInputType: .emailAddress,
-                  fieldController: _emailController,
-                  hint: 'Enter your email address.',
-                  labelText: 'Email',
-                  onValidityChanged: (isValid) {
-                    setState(() => _isEmailValid = isValid);
-                  },
+                    Text(
+                      "We will send 4 digits code to your email.",
+                      style: TextStyle(
+                        fontFamily: 'GeneralSans',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
+                        color: const Color.fromARGB(150, 1, 1, 1),
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    Form(
+                      key: _formKey,
+                      child: CustomFormField(
+                        fieldController: _emailController,
+                        hint: 'Enter your email address.',
+                        labelText: 'Email',
+                        onValidityChanged: (isValid) {
+                          setState(() {
+                            _isEmailValid = isValid;
+                          });
+                        },
+                      ),
+                    ),
+                    const Spacer(),
+                    const SizedBox(height: 20),
+                    BlackButtonPrimary(
+                      buttonText: 'Send Code',
+                      onPressed: _isEmailValid ? sendCode : null,
+                    ),
+                  ],
                 ),
               ),
-              const Spacer(),
-              BlackButtonPrimary(
-                buttonText: 'Send Code',
-                onPressed: _isEmailValid ? sendCode : null,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
