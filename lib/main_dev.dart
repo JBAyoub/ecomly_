@@ -1,4 +1,5 @@
 import 'package:ecomly_frontend/ui/authentication/widgets/account_registration_screen.dart';
+import 'package:ecomly_frontend/ui/authentication/widgets/enter_code.dart';
 import 'package:ecomly_frontend/ui/authentication/widgets/forgot_password_screen.dart';
 import 'package:ecomly_frontend/ui/authentication/widgets/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ void main() {
         '/account_registration': (context) => AccountRegistrationScreen(),
         '/login': (context) => LoginScreen(),
         '/forgot-password': (context) => ForgotPasswordScreen(),
+        '/enter-code': (context) => EnterCodeScreen(),
       },
       initialRoute: '/forgot-password',
       title: 'Ecomly',

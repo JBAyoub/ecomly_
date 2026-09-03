@@ -86,7 +86,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     const SizedBox(height: 20),
                     BlackButtonPrimary(
                       buttonText: 'Send Code',
-                      onPressed: _isEmailValid ? sendCode : null,
+                      onPressed: _isEmailValid
+                          ? () {
+                              Navigator.of(context).pushNamed(
+                                '/enter-code',
+                                arguments: {'email': _emailController.text},
+                              );
+                            }
+                          : null,
                     ),
                   ],
                 ),
@@ -97,8 +104,4 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
     );
   }
-}
-
-void sendCode() {
-  // logic for sendingCode in here
 }
