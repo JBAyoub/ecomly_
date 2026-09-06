@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class EnterCodeScreen extends StatefulWidget {
   const EnterCodeScreen({super.key});
@@ -7,11 +8,121 @@ class EnterCodeScreen extends StatefulWidget {
 }
 
 class _EnterCodeScreenState extends State<EnterCodeScreen> {
+  final List<TextEditingController> _controllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
+
+  final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final email = args['email'] as String;
-    return Scaffold(body: Center(child: Text('Code sent to $email')));
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        child: Column(
+          crossAxisAlignment: .stretch,
+          children: [
+            Text(
+              "Enter 4 Digit Code",
+              style: TextStyle(
+                fontFamily: 'GeneralSans',
+                fontWeight: FontWeight.w600,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Enter the 4 digit code that we sent to your email or phone",
+              style: TextStyle(
+                fontFamily: 'GeneralSans',
+                fontWeight: FontWeight.w300,
+                fontSize: 16,
+                color: const Color.fromARGB(248, 103, 101, 101),
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            Form(
+              child: Row(
+                mainAxisAlignment: .spaceAround,
+                children: List.generate(
+                  4,
+                  (index) => SizedBox(
+                    height: 72,
+                    width: 72,
+                    child: TextFormField(
+                      controller: _controllers[index],
+                      focusNode: _focusNodes[index],
+                      autofocus: index == 0,
+                      keyboardType: TextInputType.number,
+
+                      autofillHints: const [AutofillHints.oneTimeCode],
+                      onSaved: (pin) {},
+
+                      onChanged: (value) {
+                        if (value.length > 1) {
+                          final digits = value.replaceAll(
+                            RegExp(r'[^0-9]'),
+                            '',
+                          );
+                          for (
+                            int i = 0;
+                            i < digits.length && index + i < 4;
+                            i++
+                          ) {
+                            _controllers[index + i].text = digits[i];
+                          }
+                          final nextIndex = (index + digits.length).clamp(0, 3);
+                          _focusNodes[nextIndex].requestFocus();
+                          return;
+                        }
+
+                        // Normal single-digit typing.
+                        if (value.length == 1 && index < 3) {
+                          _focusNodes[index + 1].requestFocus();
+                        }
+                      },
+                      maxLines: 1,
+                      textAlign: .center,
+
+                      style: const TextStyle(
+                        fontFamily: 'GeneralSans',
+                        fontSize: 26,
+                        fontWeight: .w600,
+                      ),
+
+                      decoration: InputDecoration(
+                        hintText: "0",
+
+                        hintStyle: TextStyle(color: const Color(0x20000000)),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(60, 158, 158, 158),
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(60, 52, 51, 51),
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

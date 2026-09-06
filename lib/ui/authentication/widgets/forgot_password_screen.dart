@@ -53,9 +53,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       "Enter your email for the verification process.",
                       style: TextStyle(
                         fontFamily: 'GeneralSans',
-                        fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.w600,
                         fontSize: 16,
-                        color: const Color.fromARGB(150, 1, 1, 1),
+                        color: const Color.fromARGB(100, 1, 1, 1),
                       ),
                     ),
 
@@ -63,9 +63,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       "We will send 4 digits code to your email.",
                       style: TextStyle(
                         fontFamily: 'GeneralSans',
-                        fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.w600,
                         fontSize: 16,
-                        color: const Color.fromARGB(150, 1, 1, 1),
+                        color: const Color.fromARGB(100, 1, 1, 1),
                       ),
                     ),
                     const SizedBox(height: 30),
