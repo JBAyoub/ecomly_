@@ -33,7 +33,7 @@ class BlackButtonPrimary extends StatelessWidget {
           Text(
             buttonText,
             style: Theme.of(context).textTheme.titleMedium
-                ?.copyWith(color: AppColors.grey5),
+                ?.copyWith(color: AppColors.white),
           ),
           if (iconData != null) Icon(iconData),
         ],

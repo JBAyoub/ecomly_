@@ -1,3 +1,4 @@
+import 'package:ecomly_frontend/ui/core/shared_ui/black_button_primary.dart';
 import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +15,20 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
     (_) => TextEditingController(),
   );
 
+  bool get otpFilled =>
+      _controllers.every((element) => element.text.isNotEmpty);
   final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
+
+  @override
+  void initState() {
+    super.initState();
+    for (final controller in _controllers) {
+      controller.addListener(() {
+        setState(() {});
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -35,15 +49,15 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
               style: textTheme.bodyMedium?.copyWith(color: AppColors.grey2),
             ),
             const SizedBox(height: 10),
-
             Form(
               child: Row(
-                mainAxisAlignment: .spaceAround,
+                mainAxisAlignment: .center,
+                spacing: 15,
                 children: List.generate(
                   4,
                   (index) => SizedBox(
-                    height: 72,
-                    width: 72,
+                    height: 64,
+                    width: 64,
                     child: TextFormField(
                       controller: _controllers[index],
                       focusNode: _focusNodes[index],
@@ -68,7 +82,6 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
                           _focusNodes[nextIndex].requestFocus();
                           return;
                         }
-
                         // Normal single-digit typing.
                         if (value.length == 1 && index < 3) {
                           _focusNodes[index + 1].requestFocus();
@@ -104,6 +117,35 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
                   ),
                 ),
               ),
+            ),
+
+            Row(
+              mainAxisAlignment: .center,
+              spacing: 0,
+              children: [
+                Text(
+                  'Email not received?',
+                  style: textTheme.titleSmall?.copyWith(color: AppColors.grey3),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Resend Code',
+                    style: textTheme.titleSmall!.copyWith(
+                      decoration: .underline,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Spacer(),
+            BlackButtonPrimary(
+              buttonText: 'Continue',
+              onPressed: otpFilled
+                  ? () {
+                      Navigator.popAndPushNamed(context, 'create-new-password');
+                    }
+                  : null,
             ),
           ],
         ),
