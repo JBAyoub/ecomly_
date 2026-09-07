@@ -59,10 +59,8 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
                       focusNode: _focusNodes[index],
                       autofocus: index == 0,
                       keyboardType: TextInputType.number,
-
                       autofillHints: const [AutofillHints.oneTimeCode],
                       onSaved: (pin) {},
-
                       onChanged: (value) {
                         if (value.length > 1) {
                           final digits = value.replaceAll(
@@ -94,10 +92,8 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
                         fontSize: 26,
                         fontWeight: .w600,
                       ),
-
                       decoration: InputDecoration(
                         hintText: "0",
-
                         hintStyle: TextStyle(color: const Color(0x20000000)),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),

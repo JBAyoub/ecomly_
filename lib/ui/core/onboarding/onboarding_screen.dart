@@ -2,13 +2,8 @@ import 'package:ecomly_frontend/ui/core/shared_ui/black_button_primary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const new({super.key});
-  @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class OnboardingScreen extends StatelessWidget {
+  OnboardingScreen({super.key});
   final Widget decorationLines = SvgPicture.asset(
     'assets/vector_images/lines_decoration.svg',
     semanticsLabel: 'Black lines',
