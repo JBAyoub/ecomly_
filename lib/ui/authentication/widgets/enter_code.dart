@@ -16,9 +16,9 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
   final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final email = args['email'] as String;
+    // final args =
+    //  ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    // final email = args['email'] as String;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
