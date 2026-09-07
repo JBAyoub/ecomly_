@@ -44,6 +44,7 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
     //  ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     // final email = args['email'] as String;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),

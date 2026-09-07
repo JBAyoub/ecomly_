@@ -3,6 +3,7 @@ import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/login_with_facebook_button.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/login_with_google_button.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/or_divider.dart';
+import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,23 +34,18 @@ class _LoginScreenState extends State<LoginScreen> {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
+            spacing: 10,
             crossAxisAlignment: .stretch,
             children: [
               Text("Login to your account", style: textTheme.headlineLarge),
               Text(
                 "It's great to see you again.",
-                style: TextStyle(
-                  fontFamily: 'GeneralSans',
-                  fontWeight: .w300,
-                  fontSize: 16,
-                  letterSpacing: 0,
-                  wordSpacing: 0,
-                  color: const Color.fromARGB(200, 1, 1, 1),
-                ),
+                style: textTheme.bodyLarge?.copyWith(color: AppColors.grey3),
               ),
               const SizedBox(height: 20),
               Form(
@@ -78,27 +74,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           'Forgot your password?',
-                          style: TextStyle(
-                            fontWeight: .normal,
-                            fontFamily: 'GeneralSans',
-                            fontSize: 15,
-                          ),
+                          style: textTheme.bodyMedium,
                         ),
                         TextButton(
                           style: TextButton.styleFrom(
                             overlayColor: Colors.transparent,
                           ),
-                          onPressed: () {},
-                          child: const Text(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/forgot-password');
+                          },
+                          child: Text(
                             'Reset your password.',
-                            style: TextStyle(
-                              fontWeight: .w600,
-                              fontSize: 15,
-                              fontFamily: 'GeneralSans',
-                              color: Color(0xFF000000),
+                            style: textTheme.bodyMedium?.copyWith(
                               decoration: .underline,
+                              fontWeight: .w600,
                             ),
                           ),
                         ),
@@ -110,7 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 10),
                     const OrDivider(),
+                    const SizedBox(height: 10),
+
                     LoginWithGoogleButton(buttonText: 'Log in'),
+                    const SizedBox(height: 5),
                     LoginWithFacebookButton(buttonText: 'Log in'),
                   ],
                 ),
@@ -120,26 +114,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: .center,
                 mainAxisSize: .min,
                 children: [
-                  const Text(
+                  Text(
                     "Don't have an account?",
-                    style: TextStyle(
-                      fontWeight: .normal,
-                      fontFamily: 'GeneralSans',
-                      fontSize: 15,
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: AppColors.grey2,
                     ),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       overlayColor: Colors.transparent,
                     ),
-                    onPressed: () {},
-                    child: const Text(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/account_registration');
+                    },
+                    child: Text(
                       'Join',
-                      style: TextStyle(
+                      style: textTheme.bodyLarge?.copyWith(
                         fontWeight: .w600,
-                        fontSize: 15,
-                        fontFamily: 'GeneralSans',
-                        color: Color(0xFF000000),
                         decoration: .underline,
                       ),
                     ),
