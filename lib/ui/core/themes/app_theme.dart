@@ -56,8 +56,6 @@ abstract final class AppTheme {
     ),
     titleSmall: TextStyle(
       fontSize: 14,
-
-      qsdqs
       height: 1.4,
       fontWeight: FontWeight.w500,
     ),
