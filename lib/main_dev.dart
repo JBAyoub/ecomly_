@@ -23,7 +23,7 @@ void main() {
         '/enter-code': (context) => EnterCodeScreen(),
         '/create-new-password': (context) => CreateNewPasswordScreen(),
       },
-      initialRoute: '/forgot-password',
+      initialRoute: '/login',
       title: 'Ecomly',
     ),
   );

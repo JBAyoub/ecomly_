@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool _isEmailValid = false;
@@ -29,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -36,16 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: .stretch,
             children: [
-              Text(
-                "Login to your account",
-                style: TextStyle(
-                  fontFamily: 'GeneralSans',
-                  fontWeight: .w600,
-                  fontSize: 32,
-                  letterSpacing: 0,
-                  wordSpacing: 0,
-                ),
-              ),
+              Text("Login to your account", style: textTheme.headlineLarge),
               Text(
                 "It's great to see you again.",
                 style: TextStyle(

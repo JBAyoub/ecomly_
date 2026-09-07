@@ -2,85 +2,105 @@ import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 abstract final class AppTheme {
-  static const _textTheme = TextTheme(
+  static const TextTheme textTheme = TextTheme(
     displayLarge: TextStyle(
-      fontSize: 36,
+      fontSize: 64,
+      height: 1.25,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0,
-      wordSpacing: 0,
     ),
     headlineLarge: TextStyle(
-      fontSize: 36,
-      fontWeight: FontWeight.w700,
-      letterSpacing: 0,
-      wordSpacing: 0,
+      fontSize: 32,
+      height: 1.0,
+      fontWeight: FontWeight.w600,
     ),
     headlineMedium: TextStyle(
-      fontSize: 26,
-      fontWeight: .w600,
-      letterSpacing: 0,
-      wordSpacing: 0,
+      fontSize: 24,
+      height: 1.2,
+      fontWeight: FontWeight.w600,
     ),
     headlineSmall: TextStyle(
-      fontSize: 18,
+      fontSize: 20,
+      height: 1.2,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0,
-      wordSpacing: 0,
+    ),
+
+    // B1
+    bodyLarge: TextStyle(
+      fontSize: 16,
+      height: 1.4,
+      fontWeight: FontWeight.w400,
+    ),
+
+    // B2
+    bodyMedium: TextStyle(
+      fontSize: 14,
+      height: 1.4,
+      fontWeight: FontWeight.w400,
+    ),
+
+    // B3
+    bodySmall: TextStyle(
+      fontSize: 12,
+      height: 1.4,
+      fontWeight: FontWeight.w400,
+    ),
+
+    // Medium / SemiBold variants can use the remaining slots
+    titleLarge: TextStyle(
+      fontSize: 20,
+      height: 1.2,
+      fontWeight: FontWeight.w500,
     ),
     titleMedium: TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0,
-      wordSpacing: 0,
-    ),
-    bodyLarge: TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-      wordSpacing: 0,
-    ),
-    bodyMedium: TextStyle(
       fontSize: 16,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-      wordSpacing: 0,
+      height: 1.4,
+      fontWeight: FontWeight.w500,
     ),
-    bodySmall: TextStyle(
+    titleSmall: TextStyle(
       fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: AppColors.grey3,
+      height: 1.4,
+      fontWeight: FontWeight.w500,
+    ),
+
+    labelLarge: TextStyle(
+      fontSize: 16,
+      height: 1.4,
+      fontWeight: FontWeight.w600,
+    ),
+    labelMedium: TextStyle(
+      fontSize: 14,
+      height: 1.4,
+      fontWeight: FontWeight.w600,
     ),
     labelSmall: TextStyle(
-      fontSize: 10,
-      fontWeight: FontWeight.w500,
+      fontSize: 12,
+      height: 1.4,
+      fontWeight: FontWeight.w600,
       color: AppColors.grey3,
     ),
-    labelLarge: TextStyle(
+  );
+
+  static const InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
+    hintStyle: TextStyle(
+      color: AppColors.grey3,
       fontSize: 18,
       fontWeight: FontWeight.w400,
-      color: AppColors.grey3,
     ),
   );
-  static const _inputDecorationTheme = InputDecorationTheme(
-    hintStyle: TextStyle(
-      // grey3 works for both light and dark themes
-      color: AppColors.grey3,
-      fontSize: 18.0,
-      fontWeight: FontWeight.w400,
-    ),
-  );
-  static ThemeData lightTheme = ThemeData(
+
+  static final ThemeData lightTheme = ThemeData(
     fontFamily: 'GeneralSans',
     brightness: Brightness.light,
     colorScheme: AppColors.lightColorScheme,
-    textTheme: _textTheme,
-    inputDecorationTheme: _inputDecorationTheme,
+    textTheme: textTheme,
+    inputDecorationTheme: inputDecorationTheme,
   );
-  static ThemeData darkTheme = ThemeData(
+
+  static final ThemeData darkTheme = ThemeData(
     fontFamily: 'GeneralSans',
     brightness: Brightness.dark,
     colorScheme: AppColors.darkColorScheme,
-    textTheme: _textTheme,
-    inputDecorationTheme: _inputDecorationTheme,
+    textTheme: textTheme,
+    inputDecorationTheme: inputDecorationTheme,
   );
 }
