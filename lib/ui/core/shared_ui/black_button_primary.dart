@@ -1,3 +1,4 @@
+import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BlackButtonPrimary extends StatelessWidget {
@@ -15,11 +16,11 @@ class BlackButtonPrimary extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       style: FilledButton.styleFrom(
-        disabledBackgroundColor: const Color.fromARGB(100, 70, 70, 70),
-        disabledForegroundColor: const Color(0xFFFFFFFF),
+        disabledBackgroundColor: AppColors.grey3.withAlpha(100),
+        disabledForegroundColor: AppColors.white,
         padding: const EdgeInsets.all(20),
         visualDensity: .comfortable,
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: AppColors.black1,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(8),
         ),
@@ -31,7 +32,8 @@ class BlackButtonPrimary extends StatelessWidget {
         children: [
           Text(
             buttonText,
-            style: TextStyle(fontFamily: 'GeneralSans', fontSize: 18),
+            style: Theme.of(context).textTheme.titleMedium
+                ?.copyWith(color: AppColors.grey5),
           ),
           if (iconData != null) Icon(iconData),
         ],

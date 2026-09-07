@@ -79,7 +79,6 @@ flutter:
         # Extra Light
         - asset: assets/fonts/GeneralSans-Extralight.otf
           weight: 200
-
         - asset: assets/fonts/GeneralSans-ExtralightItalic.otf
           weight: 200
           style: italic

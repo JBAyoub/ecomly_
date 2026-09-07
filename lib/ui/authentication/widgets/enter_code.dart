@@ -1,3 +1,4 @@
+import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,6 +17,7 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
   final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     // final args =
     //  ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     // final email = args['email'] as String;
@@ -26,23 +28,11 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
         child: Column(
           crossAxisAlignment: .stretch,
           children: [
-            Text(
-              "Enter 4 Digit Code",
-              style: TextStyle(
-                fontFamily: 'GeneralSans',
-                fontWeight: FontWeight.w600,
-                fontSize: 32,
-              ),
-            ),
+            Text("Enter 4 Digit Code", style: textTheme.displayLarge),
             const SizedBox(height: 10),
             Text(
               "Enter the 4 digit code that we sent to your email or phone",
-              style: TextStyle(
-                fontFamily: 'GeneralSans',
-                fontWeight: FontWeight.w300,
-                fontSize: 16,
-                color: const Color.fromARGB(248, 103, 101, 101),
-              ),
+              style: textTheme.bodyMedium?.copyWith(color: AppColors.grey2),
             ),
             const SizedBox(height: 10),
 
@@ -86,7 +76,6 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
                       },
                       maxLines: 1,
                       textAlign: .center,
-
                       style: const TextStyle(
                         fontFamily: 'GeneralSans',
                         fontSize: 26,
@@ -98,14 +87,14 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(60, 158, 158, 158),
+                            color: AppColors.grey5,
                             width: 1,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(60, 52, 51, 51),
+                            color: AppColors.grey2,
                             width: 2,
                           ),
                         ),

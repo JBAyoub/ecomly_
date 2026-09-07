@@ -3,12 +3,48 @@ import 'package:flutter/material.dart';
 
 abstract final class AppTheme {
   static const _textTheme = TextTheme(
-    headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.w900),
-    headlineMedium: TextStyle(fontSize: 26, fontWeight: .w600),
-    headlineSmall: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-    titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-    bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-    bodyMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+    displayLarge: TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      wordSpacing: 0,
+    ),
+    headlineLarge: TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.w700,
+      letterSpacing: 0,
+      wordSpacing: 0,
+    ),
+    headlineMedium: TextStyle(
+      fontSize: 26,
+      fontWeight: .w600,
+      letterSpacing: 0,
+      wordSpacing: 0,
+    ),
+    headlineSmall: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      wordSpacing: 0,
+    ),
+    titleMedium: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0,
+      wordSpacing: 0,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+      wordSpacing: 0,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+      wordSpacing: 0,
+    ),
     bodySmall: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
@@ -25,14 +61,6 @@ abstract final class AppTheme {
       color: AppColors.grey3,
     ),
   );
-
-  static ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    colorScheme: AppColors.lightColorScheme,
-    textTheme: _textTheme,
-    inputDecorationTheme: _inputDecorationTheme,
-  );
-
   static const _inputDecorationTheme = InputDecorationTheme(
     hintStyle: TextStyle(
       // grey3 works for both light and dark themes
@@ -41,7 +69,15 @@ abstract final class AppTheme {
       fontWeight: FontWeight.w400,
     ),
   );
+  static ThemeData lightTheme = ThemeData(
+    fontFamily: 'GeneralSans',
+    brightness: Brightness.light,
+    colorScheme: AppColors.lightColorScheme,
+    textTheme: _textTheme,
+    inputDecorationTheme: _inputDecorationTheme,
+  );
   static ThemeData darkTheme = ThemeData(
+    fontFamily: 'GeneralSans',
     brightness: Brightness.dark,
     colorScheme: AppColors.darkColorScheme,
     textTheme: _textTheme,

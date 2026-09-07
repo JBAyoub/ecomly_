@@ -1,3 +1,4 @@
+import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field_view_model.dart';
 
@@ -35,16 +36,13 @@ class _CustomFormFieldState extends State<CustomFormField> {
   );
 
   final OutlineInputBorder errorBorder = OutlineInputBorder(
-    borderSide: const BorderSide(
-      color: Color.fromARGB(173, 241, 11, 11),
-      width: 1,
-    ),
+    borderSide: const BorderSide(color: AppColors.warning, width: 1),
     borderRadius: BorderRadius.circular(10),
   );
   final OutlineInputBorder validFieldBorder = OutlineInputBorder(
     borderSide: const BorderSide(
       style: .solid,
-      color: Color(0xFF0C9409),
+      color: AppColors.success,
       width: 2,
     ),
     borderRadius: BorderRadius.circular(10),
@@ -115,12 +113,10 @@ class _CustomFormFieldState extends State<CustomFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          widget._labelText,
-          style: const TextStyle(fontFamily: 'GeneralSans', fontSize: 18),
-        ),
+        Text(widget._labelText, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 6),
         TextFormField(
+          style: Theme.of(context).textTheme.titleMedium,
           controller: widget._fieldController,
           keyboardType: widget._textInputType,
           obscureText: hideText,
@@ -139,20 +135,14 @@ class _CustomFormFieldState extends State<CustomFormField> {
             contentPadding: const EdgeInsets.all(18),
             floatingLabelBehavior: FloatingLabelBehavior.never,
             hintText: widget._hint,
-            hintStyle: const TextStyle(
-              fontFamily: 'GeneralSans',
-              fontSize: 16,
-              fontWeight: FontWeight.w100,
-              color: Color.fromARGB(255, 149, 149, 149),
-            ),
+            hintStyle: Theme.of(context).textTheme.bodyMedium
+                ?.copyWith(color: AppColors.grey5),
             enabledBorder: isFieldValid == true
                 ? validFieldBorder
                 : enabledFocusedBorder,
             focusedBorder: isFieldValid == true
                 ? validFieldBorder
                 : enabledFocusedBorder,
-
-            // Flutter automatically uses these when the validator returns an error string
             errorBorder: errorBorder,
             focusedErrorBorder: errorBorder,
           ),

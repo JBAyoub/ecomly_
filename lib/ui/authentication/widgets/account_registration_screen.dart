@@ -39,6 +39,9 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    // final _colorTheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -51,16 +54,7 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: .max,
               children: [
-                Text(
-                  "Create an account",
-                  style: TextStyle(
-                    fontFamily: 'GeneralSans',
-                    fontWeight: .w600,
-                    fontSize: 32,
-                    letterSpacing: 0,
-                    wordSpacing: 0,
-                  ),
-                ),
+                Text("Create an account", style: textTheme.displayLarge),
                 Text(
                   "Let's create your account.",
                   style: TextStyle(
