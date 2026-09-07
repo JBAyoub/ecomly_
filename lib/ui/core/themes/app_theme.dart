@@ -44,8 +44,6 @@ abstract final class AppTheme {
       height: 1.4,
       fontWeight: FontWeight.w400,
     ),
-
-    // Medium / SemiBold variants can use the remaining slots
     titleLarge: TextStyle(
       fontSize: 20,
       height: 1.2,
