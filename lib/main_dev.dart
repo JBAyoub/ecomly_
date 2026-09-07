@@ -1,4 +1,5 @@
 import 'package:ecomly_frontend/ui/authentication/widgets/account_registration_screen.dart';
+import 'package:ecomly_frontend/ui/authentication/widgets/create_new_password.dart';
 import 'package:ecomly_frontend/ui/authentication/widgets/enter_code.dart';
 import 'package:ecomly_frontend/ui/authentication/widgets/forgot_password_screen.dart';
 import 'package:ecomly_frontend/ui/authentication/widgets/login_screen.dart';
@@ -20,6 +21,7 @@ void main() {
         '/login': (context) => LoginScreen(),
         '/forgot-password': (context) => ForgotPasswordScreen(),
         '/enter-code': (context) => EnterCodeScreen(),
+        '/create-new-password': (context) => CreateNewPasswordScreen(),
       },
       initialRoute: '/forgot-password',
       title: 'Ecomly',

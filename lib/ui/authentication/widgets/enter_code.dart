@@ -30,6 +30,14 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
   }
 
   @override
+  void dispose() {
+    for (final controller in _controllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     // final args =
@@ -143,7 +151,7 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
               buttonText: 'Continue',
               onPressed: otpFilled
                   ? () {
-                      Navigator.popAndPushNamed(context, 'create-new-password');
+                      Navigator.of(context).pushNamed('/create-new-password');
                     }
                   : null,
             ),
