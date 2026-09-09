@@ -91,7 +91,12 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return const Dialog(child: SuccessModal());
+                          return SuccessModal(
+                            hasButton: true,
+                            buttonText: 'Login',
+                            title: 'Password Changed!',
+                            message: 'You can now use your new password to login to your account.',
+                          );
                         },
                       );
                     }
