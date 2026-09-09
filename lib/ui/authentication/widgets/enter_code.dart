@@ -1,4 +1,4 @@
-import 'package:ecomly_frontend/ui/core/shared_ui/black_button_primary.dart';
+import 'package:ecomly_frontend/ui/core/shared_ui/buttons/black_button_primary.dart';
 import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

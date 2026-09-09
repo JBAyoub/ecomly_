@@ -1,4 +1,4 @@
-import 'package:ecomly_frontend/ui/core/shared_ui/black_button_primary.dart';
+import 'package:ecomly_frontend/ui/core/shared_ui/buttons/black_button_primary.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/login_with_facebook_button.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/login_with_google_button.dart';

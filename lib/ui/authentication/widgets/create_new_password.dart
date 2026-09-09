@@ -1,4 +1,5 @@
-import 'package:ecomly_frontend/ui/core/shared_ui/black_button_primary.dart';
+import 'package:ecomly_frontend/ui/core/shared_ui/buttons/black_button_primary.dart';
+import 'package:ecomly_frontend/ui/core/shared_ui/dialogs/success_modal.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field.dart';
 import 'package:ecomly_frontend/ui/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,12 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                       _passwordController.text.isNotEmpty &&
                       _confirmPasswordController.text.isNotEmpty
                   ? () {
-                      Navigator.of(context).popAndPushNamed('/login');
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const Dialog(child: SuccessModal());
+                        },
+                      );
                     }
                   : null,
             ),
