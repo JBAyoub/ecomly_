@@ -44,66 +44,76 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Column(
-          crossAxisAlignment: .stretch,
-          mainAxisAlignment: .start,
-          children: [
-            Text('Reset Password', style: textTheme.displayLarge),
-            const SizedBox(height: 10),
-            Text(
-              'Set the new password for your account so you can login and access all the features.',
-              style: textTheme.bodyLarge?.copyWith(color: AppColors.grey2),
-            ),
-            CustomFormField(
-              fieldController: _passwordController,
-              hint: 'Enter your new password',
-              labelText: 'Password',
-              isPassword: true,
-              hideText: true,
-            ),
-            const SizedBox(height: 10),
-            CustomFormField(
-              fieldController: _confirmPasswordController,
-              hint: 'Re-enter your new password',
-              labelText: 'Password',
-              isPassword: true,
-              hideText: true,
-            ),
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: Column(
+                crossAxisAlignment: .stretch,
+                mainAxisAlignment: .start,
+                children: [
+                  Text('Reset Password', style: textTheme.displayLarge),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Set the new password for your account so you can login and access all the features.',
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: AppColors.grey2,
+                    ),
+                  ),
+                  CustomFormField(
+                    fieldController: _passwordController,
+                    hint: 'Enter your new password',
+                    labelText: 'Password',
+                    isPassword: true,
+                    hideText: true,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomFormField(
+                    fieldController: _confirmPasswordController,
+                    hint: 'Re-enter your new password',
+                    labelText: 'Password',
+                    isPassword: true,
+                    hideText: true,
+                  ),
 
-            if (shouldShowPasswordError)
-              Text(
-                textAlign: .end,
-                'Passwords do not match!',
-                style: textTheme.bodyLarge?.copyWith(color: AppColors.warning),
+                  if (shouldShowPasswordError)
+                    Text(
+                      textAlign: .end,
+                      'Passwords do not match!',
+                      style: textTheme.bodyLarge?.copyWith(
+                        color: AppColors.warning,
+                      ),
+                    ),
+                  Spacer(),
+
+                  BlackButtonPrimary(
+                    buttonText: 'Continue',
+                    onPressed:
+                        passwordMatch &&
+                            _passwordController.text.isNotEmpty &&
+                            _confirmPasswordController.text.isNotEmpty
+                        ? () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return SuccessModal(
+                                  hasButton: true,
+                                  buttonText: 'Login',
+                                  title: 'Password Changed!',
+                                  message: 'You can now use your new password to login to your account.',
+                                );
+                              },
+                            );
+                          }
+                        : null,
+                  ),
+                ],
               ),
-            Spacer(),
-
-            BlackButtonPrimary(
-              buttonText: 'Continue',
-              onPressed:
-                  passwordMatch &&
-                      _passwordController.text.isNotEmpty &&
-                      _confirmPasswordController.text.isNotEmpty
-                  ? () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return SuccessModal(
-                            hasButton: true,
-                            buttonText: 'Login',
-                            title: 'Password Changed!',
-                            message: 'You can now use your new password to login to your account.',
-                          );
-                        },
-                      );
-                    }
-                  : null,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
