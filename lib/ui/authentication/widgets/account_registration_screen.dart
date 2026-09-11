@@ -1,3 +1,4 @@
+import 'package:ecomly_frontend/ui/authentication/view_models/account_registration_view_model.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/buttons/black_button_primary.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/login_with_facebook_button.dart';
@@ -15,28 +16,18 @@ class AccountRegistrationScreen extends StatefulWidget {
 }
 
 class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  bool _isNameValid = false;
-  bool _isEmailValid = false;
-  bool _isPasswordValid = false;
+  late final AccountRegistrationViewModel _viewModel;
 
-  bool get _isFormValid => _isNameValid && _isEmailValid && _isPasswordValid;
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = AccountRegistrationViewModel();
+  }
 
   @override
   void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
+    _viewModel.dispose();
     super.dispose();
-  }
-
-  void _onCreateAccountPress() {
-    // final email = emailController.text.trim();
-    // final password = passwordController.text.trim();
-    // Proceed with registration API call/navigation
   }
 
   @override
@@ -69,85 +60,85 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        spacing: 15,
-                        children: [
-                          CustomFormField(
-                            fieldController: nameController,
-                            hint: 'Enter your full name',
-                            labelText: "Full Name",
-                            textInputType: .name,
-                            hideText: false,
-                            onValidityChanged: (isValid) =>
-                                setState(() => _isNameValid = isValid),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      spacing: 15,
+                      children: [
+                        CustomFormField(
+                          fieldController: _viewModel.nameController,
+                          hint: 'Enter your full name',
+                          labelText: "Full Name",
+                          textInputType: .name,
+                          hideText: false,
+                          onValidityChanged: (isValid) =>
+                              _viewModel.updateNameValidity(isValid),
+                        ),
+                        CustomFormField(
+                          fieldController: _viewModel.emailController,
+                          hint: 'Enter your email adress',
+                          labelText: "Email",
+                          textInputType: .emailAddress,
+                          hideText: false,
+                          onValidityChanged: (isValid) =>
+                              _viewModel.updateEmailValidity(isValid),
+                        ),
+                        CustomFormField(
+                          fieldController: _viewModel.passwordController,
+                          hint: 'Enter your password',
+                          labelText: "Password",
+                          textInputType: .visiblePassword,
+                          hideText: true,
+                          isRegistration: true,
+                          isPassword: true,
+                          onValidityChanged: (isValid) =>
+                              _viewModel.updatePasswordValidity(isValid),
+                        ),
+                        Text(
+                          'By signing up you agree to our Terms, Privacy Policy, and Cookie Use',
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: AppColors.black1,
                           ),
-
-                          CustomFormField(
-                            fieldController: emailController,
-                            hint: 'Enter your email adress',
-                            labelText: "Email",
-                            textInputType: .emailAddress,
-                            hideText: false,
-                            onValidityChanged: (isValid) =>
-                                setState(() => _isEmailValid = isValid),
-                          ),
-                          CustomFormField(
-                            fieldController: passwordController,
-                            hint: 'Enter your password',
-                            labelText: "Password",
-                            textInputType: .visiblePassword,
-                            hideText: true,
-                            isRegistration: true,
-                            isPassword: true,
-                            onValidityChanged: (isValid) =>
-                                setState(() => _isPasswordValid = isValid),
-                          ),
-                          Text(
-                            'By signing up you agree to our Terms, Privacy Policy, and Cookie Use',
-                            style: textTheme.bodyMedium?.copyWith(
-                              color: AppColors.black1,
+                        ),
+                        ListenableBuilder(
+                          listenable: _viewModel,
+                          builder: (BuildContext context, Widget? child) {
+                            return BlackButtonPrimary(
+                              buttonText: 'Create an account',
+                              onPressed: _viewModel.isFormValid
+                                  ? () {
+                                      Navigator.of(context).pushNamed('/login');
+                                    }
+                                  : null,
+                            );
+                          },
+                        ),
+                        const OrDivider(),
+                        LoginWithGoogleButton(buttonText: 'Sign up'),
+                        LoginWithFacebookButton(buttonText: 'Sign up'),
+                        Row(
+                          mainAxisSize: .min,
+                          mainAxisAlignment: .center,
+                          children: [
+                            Text(
+                              'Already have an account?',
+                              style: textTheme.bodyLarge?.copyWith(
+                                color: AppColors.grey3,
+                              ),
                             ),
-                          ),
-                          BlackButtonPrimary(
-                            buttonText: 'Create an account',
-                            onPressed: _isFormValid
-                                ? () {
-                                    Navigator.of(context).pushNamed('/login');
-                                  }
-                                : null,
-                          ),
-                          const OrDivider(),
-                          LoginWithGoogleButton(buttonText: 'Sign up'),
-                          LoginWithFacebookButton(buttonText: 'Sign up'),
-                          Row(
-                            mainAxisSize: .min,
-                            mainAxisAlignment: .center,
-                            children: [
-                              Text(
-                                'Already have an account?',
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Log In',
                                 style: textTheme.bodyLarge?.copyWith(
-                                  color: AppColors.grey3,
+                                  decoration: .underline,
+                                  fontWeight: .w500,
                                 ),
                               ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Log In',
-                                  style: textTheme.bodyLarge?.copyWith(
-                                    decoration: .underline,
-                                    fontWeight: .w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),

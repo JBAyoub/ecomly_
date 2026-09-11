@@ -52,7 +52,6 @@ class _CustomFormFieldState extends State<CustomFormField> {
   bool? isFieldValid;
   String? _errorText;
   // ignore: unused_field
-  bool _hasInteracted = false;
 
   @override
   void initState() {
@@ -73,7 +72,6 @@ class _CustomFormFieldState extends State<CustomFormField> {
     final isValid = errorMessage == null;
 
     setState(() {
-      _hasInteracted = true;
       _errorText = errorMessage;
       isFieldValid = isValid;
     });
