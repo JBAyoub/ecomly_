@@ -11,10 +11,8 @@ class SuccessAnimation extends StatefulWidget {
 class _SuccessAnimationState extends State<SuccessAnimation>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-
   late final Animation<double> _circleScaleAnimation;
   late final Animation<double> _circleOpacityAnimation;
-
   late final Animation<double> _checkScaleAnimation;
   late final Animation<double> _checkOpacityAnimation;
 
