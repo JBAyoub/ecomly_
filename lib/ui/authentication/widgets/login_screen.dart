@@ -1,3 +1,4 @@
+import 'package:ecomly_frontend/ui/authentication/view_models/login_screen_view_model.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/buttons/black_button_primary.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/login_with_facebook_button.dart';
@@ -14,19 +15,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  bool _isEmailValid = false;
-  bool _isPasswordValid = false;
-  bool get _isFormValid => _isEmailValid && _isPasswordValid;
+  late final LoginScreenViewModel _viewModel;
 
   @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _viewModel = LoginScreenViewModel();
   }
 
   @override
@@ -60,67 +54,72 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Form(
-                      key: _formKey,
-                      autovalidateMode: .onUserInteraction,
-                      child: Column(
-                        mainAxisSize: .max,
-                        spacing: 10,
-                        children: [
-                          CustomFormField(
-                            fieldController: emailController,
-                            hint: 'Enter your email address',
-                            labelText: 'Email',
-                            textInputType: .emailAddress,
-                            onValidityChanged: (isValid) =>
-                                setState(() => _isEmailValid = isValid),
-                          ),
-                          CustomFormField(
-                            fieldController: passwordController,
-                            hint: 'Enter your password',
-                            labelText: 'Password',
-                            hideText: true,
-                            isPassword: true,
-                            onValidityChanged: (isValid) =>
-                                setState(() => _isPasswordValid = isValid),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Forgot your password?',
-                                style: textTheme.bodyMedium,
+                    Column(
+                      mainAxisSize: .max,
+                      spacing: 10,
+                      children: [
+                        CustomFormField(
+                          fieldController: _viewModel.emailController,
+                          hint: 'Enter your email address',
+                          labelText: 'Email',
+                          textInputType: .emailAddress,
+                          onValidityChanged: (isValid) =>
+                              _viewModel.updateEmailValidity(isValid),
+                        ),
+                        CustomFormField(
+                          fieldController: _viewModel.passwordController,
+                          hint: 'Enter your password',
+                          labelText: 'Password',
+                          hideText: true,
+                          isPassword: true,
+                          onValidityChanged: (isValid) =>
+                              _viewModel.updatePasswordValidity(isValid),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Forgot your password?',
+                              style: textTheme.bodyMedium,
+                            ),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                overlayColor: Colors.transparent,
                               ),
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  overlayColor: Colors.transparent,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed('/forgot-password');
-                                },
-                                child: Text(
-                                  'Reset your password.',
-                                  style: textTheme.bodyMedium?.copyWith(
-                                    decoration: .underline,
-                                    fontWeight: .w600,
-                                  ),
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed('/forgot-password');
+                              },
+                              child: Text(
+                                'Reset your password.',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  decoration: .underline,
+                                  fontWeight: .w600,
                                 ),
                               ),
-                            ],
-                          ),
-                          BlackButtonPrimary(
-                            buttonText: 'Login',
-                            onPressed: _isFormValid ? onLoginClicked : null,
-                          ),
-                          const SizedBox(height: 10),
-                          const OrDivider(),
-                          const SizedBox(height: 10),
+                            ),
+                          ],
+                        ),
+                        ListenableBuilder(
+                          listenable: _viewModel,
+                          builder: (context, child) {
+                            return BlackButtonPrimary(
+                              buttonText: 'Login',
+                              onPressed: _viewModel.isFormValid
+                                  ? () {
+                                      _viewModel.onLoginPress(context);
+                                    }
+                                  : null,
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        const OrDivider(),
+                        const SizedBox(height: 10),
 
-                          LoginWithGoogleButton(buttonText: 'Log in'),
-                          const SizedBox(height: 5),
-                          LoginWithFacebookButton(buttonText: 'Log in'),
-                        ],
-                      ),
+                        LoginWithGoogleButton(buttonText: 'Log in'),
+                        const SizedBox(height: 5),
+                        LoginWithFacebookButton(buttonText: 'Log in'),
+                      ],
                     ),
                     const Spacer(),
                     Row(
@@ -159,11 +158,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void onLoginClicked() {
-    // final email = emailController.text.trim();
-    // final password = emailController.text.trim();
-    //proceed to API call
   }
 }

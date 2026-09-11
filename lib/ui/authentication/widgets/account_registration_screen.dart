@@ -1,4 +1,5 @@
 import 'package:ecomly_frontend/ui/authentication/view_models/account_registration_view_model.dart';
+import 'package:ecomly_frontend/ui/authentication/widgets/login_screen.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/buttons/black_button_primary.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/form_field.dart';
 import 'package:ecomly_frontend/ui/core/shared_ui/form_ui/login_with_facebook_button.dart';
@@ -127,7 +128,19 @@ class _AccountRegistrationScreenState extends State<AccountRegistrationScreen> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push<MaterialPageRoute>(
+                                  context,
+                                  MaterialPageRoute(
+                                    fullscreenDialog: true,
+                                    allowSnapshotting: true,
+                                    directionalTraversalEdgeBehavior:
+                                        .closedLoop,
+                                    barrierDismissible: false,
+                                    builder: (context) => LoginScreen(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Log In',
                                 style: textTheme.bodyLarge?.copyWith(
